@@ -24,12 +24,11 @@ export default function Navbar() {
 
   return (
 <nav className={styles.navbar}>
-  <span className={styles['navbar-title']}>Notes App</span>
+  <span className={styles['navbar-title']}>Keep Notes</span>
   <div className={styles['navbar-links']}>
-    <a href="/">Notes</a>
-    <a href="/dashboard">Dashboard</a>
+    <a href="/dashboard">Notes</a>
     <a href="/profile">Profile</a>
-    <a href="/error">Error</a>
+    <a href="/logout">Logout</a>
   </div>
 </nav>
 
