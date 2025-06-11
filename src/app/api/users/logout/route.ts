@@ -2,6 +2,14 @@
 import { NextResponse } from 'next/server'
 
 export async function POST() {
-  // For localStorage-based auth, logout is handled client-side by removing token.
-  return NextResponse.json({ success: true, message: 'Client should remove token from storage.' })
+  const res = NextResponse.json({ success: true, message: 'Logged out successfully' })
+  
+  // Clear the token cookie by setting it to empty with maxAge 0
+  res.cookies.set('token', '', {
+    httpOnly: true,
+    path: '/',
+    maxAge: 0,
+  })
+
+  return res
 }

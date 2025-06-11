@@ -11,18 +11,18 @@ export default function EditNotePage() {
 
   useEffect(() => {
     const fetchNote = async () => {
-      const res = await fetch('/api/notes' , {
-  headers: {
-    Authorization: `Bearer ${localStorage.getItem('token')}`,
-  },
-}
-        
-      )
+      const res = await fetch('/api/notes')
+      if (res.status === 401) {
+        router.push('/signin')
+        return
+      }
+
       const data = await res.json()
       const match = data.find((n: any) => n.id === id)
       if (match) setNote(match)
       else router.push('/') 
     }
+
     fetchNote()
   }, [id, router])
 

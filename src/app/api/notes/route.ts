@@ -9,7 +9,7 @@ const filePath = path.join(process.cwd(), 'src', 'data', 'notes.json')
 
 
 export async function GET(req: NextRequest) {
-  const token = req.headers.get('authorization')?.replace('Bearer ', '')
+const token = req.cookies.get('token')?.value || ''
   const user = verifyToken(token || '')
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
@@ -20,7 +20,7 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-  const token = req.headers.get('authorization')?.replace('Bearer ', '')
+const token = req.cookies.get('token')?.value || ''
   const user = verifyToken(token || '')
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
 
 
 export async function PATCH(req: NextRequest) {
-  const token = req.headers.get('authorization')?.replace('Bearer ', '')
+const token = req.cookies.get('token')?.value || ''
   const user = verifyToken(token || '')
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 

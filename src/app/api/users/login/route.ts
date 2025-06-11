@@ -1,4 +1,3 @@
-// File: app/api/users/login/route.ts
 import { NextRequest, NextResponse } from 'next/server'
 import path from 'path'
 import { readFile } from 'fs/promises'
@@ -13,16 +12,20 @@ export async function POST(req: NextRequest) {
   const users = JSON.parse(await readFile(loginUsersPath, 'utf-8'))
 
   const user = users.find((u: any) => u.email === email)
-  if (!user) {
-    return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 })
-  }
-
-  const match = await bcrypt.compare(password, user.password)
-  if (!match) {
+  if (!user || !(await bcrypt.compare(password, user.password))) {
     return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 })
   }
 
   const token = jwt.sign({ id: user.id, email: user.email }, LOGIN_SECRET, { expiresIn: '1h' })
 
-  return NextResponse.json({ token })
+  const res = NextResponse.json({ success: true })
+  res.cookies.set('token', token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    path: '/',
+    maxAge: 60 * 60,
+  })
+
+  return res
 }

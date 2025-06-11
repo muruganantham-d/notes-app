@@ -1,36 +1,29 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation';
-import '../styles/Navbar.module.css';
 import styles from '../styles/Navbar.module.css'
 
-
 export default function Navbar() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
   const router = useRouter()
 
-  useEffect(() => {
-    const token = localStorage.getItem('token')
-    setIsLoggedIn(!!token)
-  }, [])
-
-  const handleLogout = () => {
-    localStorage.removeItem('token')
-    setIsLoggedIn(false)
+  const handleLogout = async () => {
+    await fetch('/api/users/logout', { method: 'POST' }) 
     router.push('/signin')
   }
 
   return (
-<nav className={styles.navbar}>
-  <span className={styles['navbar-title']}>Keep Notes</span>
-  <div className={styles['navbar-links']}>
-    <a href="/dashboard">Notes</a>
-    <a href="/profile">Profile</a>
-    <a href="/logout">Logout</a>
-  </div>
-</nav>
-
+    <nav className={styles.navbar}>
+      <div className={styles.navbar_wrap}>
+      <span className={styles['navbar-title']}>Keep Notes</span>
+      <div className={styles['navbar-links']}>
+        <Link href="/dashboard">Notes</Link>
+        <Link href="/profile">Profile</Link>
+        <button onClick={handleLogout} className={styles.logoutButton}>
+          Logout
+        </button>
+      </div>
+      </div>
+    </nav>
   )
 }

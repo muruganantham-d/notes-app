@@ -6,7 +6,7 @@ import { RootState } from '@/store'
 import { setNotes } from '@/store/notesSlice'
 import NoteItem from '@/components/NoteItem'
 import { useRouter } from 'next/navigation'
-import styles from '../page.module.css';
+import styles from '../page.module.css'
 
 export default function HomePage() {
   const dispatch = useDispatch()
@@ -15,22 +15,22 @@ export default function HomePage() {
   const notesPerPage = 6
   const router = useRouter()
 
-  useEffect(() => {
-    const token = localStorage.getItem('token')
-    if (!token) return
 
+
+  useEffect(() => {
     const fetchNotes = async () => {
-  const res = await fetch('/api/notes', {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-    },
-  })
-  const data = await res.json()
-  dispatch(setNotes(data))
-}
+      const res = await fetch('/api/notes')
+      if (res.status === 401) {
+        router.push('/signin') 
+        return
+      }
+
+      const data = await res.json()
+      dispatch(setNotes(data))
+    }
 
     fetchNotes()
-  }, [dispatch])
+  }, [dispatch, router])
 
   const paginatedNotes = notes.slice((page - 1) * notesPerPage, page * notesPerPage)
   const maxPage = Math.ceil(notes.length / notesPerPage)

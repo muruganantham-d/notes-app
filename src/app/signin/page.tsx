@@ -1,4 +1,3 @@
-// File: app/signin/page.tsx
 'use client'
 
 import { useState } from 'react'
@@ -21,9 +20,8 @@ export default function SignInPage() {
     })
 
     const data = await res.json()
-    if (res.ok) {
-      localStorage.setItem('token', data.token)
-      router.push('/dashboard')
+    if (res.ok && data.success) {
+      router.push('/dashboard') 
     } else {
       setError(data.error || 'Login failed')
     }
