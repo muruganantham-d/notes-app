@@ -1,0 +1,113 @@
+.container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f9fafb;
+  font-family: 'Inter', sans-serif;
+}
+
+.leftPane {
+  flex: 1;
+  background: linear-gradient(135deg, #111827, #1f2937);
+  color: #f3f4f6;
+  padding: 4rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+/* ////////////// */
+.brand {
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.tagline {
+  font-size: 1.15rem;
+  font-weight: 400;
+  max-width: 360px;
+  line-height: 1.7;
+  opacity: 0.9;
+}
+
+.illustration {
+  width: 220px;
+  height: 220px;
+  margin-bottom: 2rem;
+  background: url('/notes-illustration.svg') no-repeat center center;
+  background-size: contain;
+  filter: drop-shadow(0 5px 8px rgba(0,0,0,0.3));
+}
+
+.formPane {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+}
+
+.formBox {
+  width: 100%;
+  max-width: 400px;
+  padding: 2.5rem;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
+}
+
+.input {
+  width: 100%;
+  padding: 0.85rem;
+  margin-bottom: 1.2rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+  outline: none;
+}
+
+.button {
+  width: 100%;
+  padding: 0.75rem;
+  color: #ffffff;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.button:hover {
+  background-color: 0 12px 28px rgba(0, 0, 0, 0.06);
+}
+
+.error {
+  color: #dc2626;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.linkText {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+
+@media only screen and (max-width: 600px){
+  .leftPane{
+    display: none;
+  }
+}

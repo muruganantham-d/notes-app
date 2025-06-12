@@ -1,4 +1,3 @@
-// ✅ File: src/app/LayoutClient.tsx
 'use client'
 
 import { usePathname } from 'next/navigation'

@@ -1,5 +1,3 @@
-// app/api/notes/route.ts
-
 import { NextRequest, NextResponse } from 'next/server'
 import { readFile, writeFile } from 'fs/promises'
 import path from 'path';

@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import styles from './page.module.css'
 
 export default function SignInPage() {
   const [email, setEmail] = useState('')
@@ -21,36 +22,53 @@ export default function SignInPage() {
 
     const data = await res.json()
     if (res.ok && data.success) {
-      router.push('/dashboard') 
+      router.push('/dashboard')
     } else {
       setError(data.error || 'Login failed')
     }
   }
 
   return (
-    <form onSubmit={handleSubmit} style={{ maxWidth: 400, margin: '2rem auto' }}>
-      <h2>Sign In</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={e => setEmail(e.target.value)}
-        required
-        style={{ width: '100%', padding: '0.75rem', marginBottom: '1rem' }}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-        required
-        style={{ width: '100%', padding: '0.75rem', marginBottom: '1rem' }}
-      />
-      <button type="submit" style={{ width: '100%', padding: '0.75rem' }}>Sign In</button>
-      <p style={{ marginTop: '1rem', textAlign: 'center' }}>
-        Don't have an account? <Link href="/signup">Register here</Link>
-      </p>
-    </form>
+    <div className={styles.container}>
+<div className={styles.leftPane}>
+  <div className={styles.illustration} />
+  <h1 className={styles.brand}>Keep Notes</h1>
+  <p className={styles.tagline}>
+    Organize your thoughts, track ideas, and stay productive. Your notes, always accessible.
+  </p>
+</div>
+
+      <div className={styles.formPane}>
+        <form onSubmit={handleSubmit} className={styles.formBox}>
+          <h2>Sign In</h2>
+          {error && <p className={styles.error}>{error}</p>}
+
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            required
+            className={styles.input}
+          />
+
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            required
+            className={styles.input}
+          />
+
+          <button type="submit" className={styles.button}>Sign In</button>
+
+          <p className={styles.linkText}>
+            Don't have an account? <Link href="/signup">Register here</Link>
+          </p>
+        </form>
+      </div>
+    </div>
   )
 }
+

@@ -1,4 +1,3 @@
-// File: app/api/users/register/route.ts
 import { NextRequest, NextResponse } from 'next/server'
 import path from 'path'
 import { readFile, writeFile } from 'fs/promises'

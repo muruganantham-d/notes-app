@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import NoteForm from '@/components/NoteForm'
+import styles from '../../create/page.module.css';
 
 export default function EditNotePage() {
   const { id } = useParams()
@@ -29,7 +30,7 @@ export default function EditNotePage() {
   if (!note) return <p>Loading...</p>
 
   return (
-    <div style={{ padding: '2rem' }}>
+    <div className={styles.create_container}>
       <h1>Edit Note</h1>
       <NoteForm isEdit initialNote={note} />
     </div>
